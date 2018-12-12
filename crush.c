@@ -26,6 +26,7 @@
 //
 
 #include "crush.h"
+#include "crush_internal.h"
 
 #include <assert.h>
 #include <limits.h>
@@ -59,29 +60,6 @@
 #define WORKMEM_SIZE (LOOKUP_SIZE * sizeof(unsigned long))
 
 #define NO_MATCH_POS ((unsigned long) -1)
-
-static const unsigned long W_BITS = 21; // Window size (17..23)
-static const unsigned long W_SIZE = 1UL << W_BITS;
-static const unsigned long W_MASK = W_SIZE - 1;
-static const unsigned long SLOT_BITS = 4;
-static const unsigned long NUM_SLOTS = 1UL << SLOT_BITS;
-
-static const unsigned long A_BITS = 2; // 1 xx
-static const unsigned long B_BITS = 2; // 01 xx
-static const unsigned long C_BITS = 2; // 001 xx
-static const unsigned long D_BITS = 3; // 0001 xxx
-static const unsigned long E_BITS = 5; // 00001 xxxxx
-static const unsigned long F_BITS = 9; // 00000 xxxxxxxxx
-static const unsigned long A = 1UL << A_BITS;
-static const unsigned long B = (1UL << B_BITS) + A;
-static const unsigned long C = (1UL << C_BITS) + B;
-static const unsigned long D = (1UL << D_BITS) + C;
-static const unsigned long E = (1UL << E_BITS) + D;
-static const unsigned long F = (1UL << F_BITS) + E;
-static const unsigned long MIN_MATCH = 3;
-static const unsigned long MAX_MATCH = (F - 1) + MIN_MATCH;
-
-static const unsigned long TOO_FAR = 1UL << 16;
 
 struct lsb_bitwriter {
 	unsigned char *next_out;
