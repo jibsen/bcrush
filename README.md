@@ -2,6 +2,8 @@
 bcrush
 ======
 
+[![Build Status](https://dev.azure.com/jibsenorg/jibsen/_apis/build/status/jibsen.bcrush?branchName=master)](https://dev.azure.com/jibsenorg/jibsen/_build/latest?definitionId=2?branchName=master)
+
 About
 -----
 
