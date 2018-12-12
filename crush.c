@@ -272,7 +272,7 @@ crush_pack_level(const void *src, void *dst, unsigned long src_size,
 	}
 }
 
-// clang -g -O1 -fsanitize=fuzzer,address -DCRUSH_FUZZING crush.c depack.c
+// clang -g -O1 -fsanitize=fuzzer,address -DCRUSH_FUZZING crush.c crush_depack.c
 #if defined(CRUSH_FUZZING)
 #include <limits.h>
 #include <stddef.h>

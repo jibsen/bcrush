@@ -11,7 +11,7 @@ project('bcrush', 'c',
   license : 'Zlib'
 )
 
-lib = library('crush', 'crush.c', 'depack.c', 'depack_file.c')
+lib = library('crush', 'crush.c', 'crush_depack.c', 'crush_depack_file.c')
 
 crush_dep = declare_dependency(
   include_directories : include_directories('.'),
