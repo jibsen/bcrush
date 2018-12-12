@@ -26,9 +26,9 @@
 #ifdef _MSC_VER
 #  define _CRT_SECURE_NO_WARNINGS
 #  define _CRT_DISABLE_PERFCRIT_LOCKS
+#  define ftello _ftelli64
 #else
 #  define _FILE_OFFSET_BITS 64
-#  define _ftelli64 ftello64
 #endif
 
 #ifdef __MINGW32__
@@ -314,8 +314,8 @@ decompress_file(const char *packedname, const char *newname, int be_verbose)
 
 	clocks = clock() - clocks;
 
-	insize = _ftelli64(packedfile);
-	outsize = _ftelli64(newfile);
+	insize = ftello(packedfile);
+	outsize = ftello(newfile);
 
 	/* Show result */
 	if (be_verbose) {
