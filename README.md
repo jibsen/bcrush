@@ -41,7 +41,7 @@ Where crush is the original CRUSH v1.00, and crushx is an implementation of
 crush with optimal parsing [posted][crushx] on Encode's Forum.
 
 [silesia]: http://sun.aei.polsl.pl/~sdeor/index.php?page=silesia
-[crushx]: https://encode.ru/threads/2578-crush-v1-1
+[crushx]: https://encode.su/threads/2578-crush-v1-1
 
 
 Usage
