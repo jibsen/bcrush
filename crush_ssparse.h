@@ -3,7 +3,7 @@
 //
 // Backwards dynamic programming parse
 //
-// Copyright (c) 2018 Joergen Ibsen
+// Copyright (c) 2018-2020 Joergen Ibsen
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -179,7 +179,7 @@ crush_pack_ssparse(const void *src, void *dst, unsigned long src_size, void *wor
 				}
 			}
 
-			if (len >= MAX_MATCH) {
+			if (len >= accept_len || len == len_limit) {
 				break;
 			}
 		}
