@@ -3,7 +3,7 @@
  *
  * C/C++ header file
  *
- * Copyright (c) 2018 Joergen Ibsen
+ * Copyright (c) 2018-2020 Joergen Ibsen
  *
  * This software is provided 'as-is', without any express or implied
  * warranty. In no event will the authors be held liable for any damages
@@ -35,9 +35,9 @@ extern "C" {
 #endif
 
 #define CRUSH_VER_MAJOR 0        /**< Major version number */
-#define CRUSH_VER_MINOR 1        /**< Minor version number */
+#define CRUSH_VER_MINOR 2        /**< Minor version number */
 #define CRUSH_VER_PATCH 0        /**< Patch version number */
-#define CRUSH_VER_STRING "0.1.0" /**< Version number as a string */
+#define CRUSH_VER_STRING "0.2.0" /**< Version number as a string */
 
 #ifdef CRUSH_DLL
 #  if defined(_WIN32) || defined(__CYGWIN__)

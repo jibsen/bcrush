@@ -34,8 +34,8 @@ Here are some results on the [Silesia compression corpus][silesia]:
 | samba   | 21.606.400 |          4.720.964 |  4.912.141 |   4.911.613 |
 | sao     |  7.251.944 |          5.344.713 |  5.472.035 |   5.368.466 |
 | webster | 41.458.703 |          9.766.251 | 10.430.228 |  10.322.130 |
-| xml     |  5.345.280 |          5.717.405 |  5.958.603 |   5.747.141 |
-| x-ray   |  8.474.240 |            535.316 |    563.744 |     561.118 |
+| xml     |  5.345.280 |            535.316 |    563.744 |     561.118 |
+| x-ray   |  8.474.240 |          5.717.405 |  5.958.603 |   5.747.141 |
 
 Where crush is the original CRUSH v1.00, and crushx is an implementation of
 crush with optimal parsing [posted][crushx] on Encode's Forum.
@@ -59,7 +59,7 @@ ninja
 
 You can also simply compile and link the source files.
 
-bcrush includes the leparse and ssparse algorithms from BriefLZ, which gives
+bcrush includes the leparse and btparse algorithms from BriefLZ, which gives
 compression levels `-5` to `-9` and the **very** slow `--optimal`.
 
 [Meson]: https://mesonbuild.com/
