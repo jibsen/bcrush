@@ -28,6 +28,7 @@
 #ifndef CRUSH_H_INCLUDED
 #define CRUSH_H_INCLUDED
 
+#include <stddef.h>
 #include <stdio.h>
 
 #ifdef __cplusplus
@@ -88,8 +89,8 @@ crush_max_packed_size(unsigned long src_size);
  * @param level compression level
  * @return required size in bytes of `workmem` buffer
  */
-CRUSH_API unsigned long
-crush_workmem_size_level(unsigned long src_size, int level);
+CRUSH_API size_t
+crush_workmem_size_level(size_t src_size, int level);
 
 /**
  * Compress `src_size` bytes of data from `src` to `dst`.

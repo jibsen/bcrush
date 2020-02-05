@@ -205,8 +205,8 @@ crush_max_packed_size(unsigned long src_size)
 #include "crush_btparse.h"
 #include "crush_leparse.h"
 
-unsigned long
-crush_workmem_size_level(unsigned long src_size, int level)
+size_t
+crush_workmem_size_level(size_t src_size, int level)
 {
 	switch (level) {
 	case 5:
@@ -218,7 +218,7 @@ crush_workmem_size_level(unsigned long src_size, int level)
 	case 10:
 		return crush_btparse_workmem_size(src_size);
 	default:
-		return CRUSH_ERROR;
+		return (size_t) -1;
 	}
 }
 

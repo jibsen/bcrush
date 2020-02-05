@@ -28,8 +28,8 @@
 #ifndef CRUSH_LEPARSE_H_INCLUDED
 #define CRUSH_LEPARSE_H_INCLUDED
 
-static unsigned long
-crush_leparse_workmem_size(unsigned long src_size)
+static size_t
+crush_leparse_workmem_size(size_t src_size)
 {
 	return (LOOKUP_SIZE < 2 * src_size ? 3 * src_size : src_size + LOOKUP_SIZE)
 	     * sizeof(uint32_t);

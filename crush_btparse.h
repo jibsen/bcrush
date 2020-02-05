@@ -28,8 +28,8 @@
 #ifndef CRUSH_BTPARSE_H_INCLUDED
 #define CRUSH_BTPARSE_H_INCLUDED
 
-static unsigned long
-crush_btparse_workmem_size(unsigned long src_size)
+static size_t
+crush_btparse_workmem_size(size_t src_size)
 {
 	return (5 * src_size + 3 + LOOKUP_SIZE) * sizeof(uint32_t);
 }
