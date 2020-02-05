@@ -183,16 +183,10 @@ crush_match_cost(unsigned long pos, unsigned long len)
 		cost += 5 + F_BITS;
 	}
 
-	unsigned long mlog = W_BITS - NUM_SLOTS;
-
-	while (pos >= (2UL << mlog)) {
-		++mlog;
-	}
-
 	cost += SLOT_BITS;
 
-	if (mlog > W_BITS - NUM_SLOTS) {
-		cost += mlog;
+	if (pos >= (2UL << (W_BITS - NUM_SLOTS))) {
+		cost += crush_log2(pos);
 	}
 	else {
 		cost += W_BITS - (NUM_SLOTS - 1);

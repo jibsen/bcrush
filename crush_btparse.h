@@ -294,18 +294,14 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 				lbw_putbits(&lbw, l - E, F_BITS);
 			}
 
-			unsigned long mlog = W_BITS - NUM_SLOTS;
+			if (offs >= (2UL << (W_BITS - NUM_SLOTS))) {
+				unsigned long mlog = crush_log2(offs);
 
-			while (offs >= (2UL << mlog)) {
-				++mlog;
-			}
-
-			lbw_putbits(&lbw, mlog - (W_BITS - NUM_SLOTS), SLOT_BITS);
-
-			if (mlog > W_BITS - NUM_SLOTS) {
+				lbw_putbits(&lbw, mlog - (W_BITS - NUM_SLOTS), SLOT_BITS);
 				lbw_putbits(&lbw, offs - (1UL << mlog), mlog);
 			}
 			else {
+				lbw_putbits(&lbw, 0, SLOT_BITS);
 				lbw_putbits(&lbw, offs, W_BITS - (NUM_SLOTS - 1));
 			}
 		}
