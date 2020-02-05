@@ -31,7 +31,7 @@
 static unsigned long
 crush_btparse_workmem_size(unsigned long src_size)
 {
-	return (5 * src_size + 3 + LOOKUP_SIZE) * sizeof(unsigned long);
+	return (5 * src_size + 3 + LOOKUP_SIZE) * sizeof(uint32_t);
 }
 
 // Forwards dynamic programming parse using binary trees, checking all
@@ -72,11 +72,11 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 		goto finalize;
 	}
 
-	unsigned long *const cost = (unsigned long *) workmem;
-	unsigned long *const mpos = cost + src_size + 1;
-	unsigned long *const mlen = mpos + src_size + 1;
-	unsigned long *const nodes = mlen + src_size + 1;
-	unsigned long *const lookup = nodes + 2 * src_size;
+	uint32_t *const cost = (uint32_t *) workmem;
+	uint32_t *const mpos = cost + src_size + 1;
+	uint32_t *const mlen = mpos + src_size + 1;
+	uint32_t *const nodes = mlen + src_size + 1;
+	uint32_t *const lookup = nodes + 2 * src_size;
 
 	// Initialize lookup
 	for (unsigned long i = 0; i < LOOKUP_SIZE; ++i) {
@@ -85,7 +85,7 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 
 	// Initialize to all literals with infinite cost
 	for (unsigned long i = 0; i <= src_size; ++i) {
-		cost[i] = ULONG_MAX;
+		cost[i] = UINT32_MAX;
 		mlen[i] = 1;
 	}
 
@@ -122,8 +122,8 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 		unsigned long pos = lookup[hash];
 		lookup[hash] = cur;
 
-		unsigned long *lt_node = &nodes[2 * cur];
-		unsigned long *gt_node = &nodes[2 * cur + 1];
+		uint32_t *lt_node = &nodes[2 * cur];
+		uint32_t *gt_node = &nodes[2 * cur + 1];
 		unsigned long lt_len = 0;
 		unsigned long gt_len = 0;
 
@@ -176,7 +176,7 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 				for (unsigned long i = max_len + 1; i <= len; ++i) {
 					unsigned long match_cost = crush_match_cost(cur - pos - 1, i);
 
-					assert(match_cost < ULONG_MAX - cost[cur]);
+					assert(match_cost < UINT32_MAX - cost[cur]);
 
 					unsigned long cost_there = cost[cur] + match_cost;
 

@@ -122,7 +122,7 @@ crush_depack(const void *src, void *dst, unsigned long depacked_size);
 /**
  * Decompress `depacked_size` bytes of data from `src_file` to `dst`.
  *
- * @param src file containing compressed data
+ * @param src_file file containing compressed data
  * @param dst pointer to where to place decompressed data
  * @param depacked_size size of decompressed data
  * @return size of decompressed data

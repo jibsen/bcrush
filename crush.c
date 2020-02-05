@@ -57,9 +57,9 @@
 
 #define LOOKUP_SIZE (1UL << CRUSH_HASH_BITS)
 
-#define WORKMEM_SIZE (LOOKUP_SIZE * sizeof(unsigned long))
+#define WORKMEM_SIZE (LOOKUP_SIZE * sizeof(uint32_t))
 
-#define NO_MATCH_POS ((unsigned long) -1)
+#define NO_MATCH_POS ((uint32_t) -1)
 
 struct lsb_bitwriter {
 	unsigned char *next_out;
@@ -150,11 +150,11 @@ crush_hash3_bits(const unsigned char *p, int bits)
 {
 	assert(bits > 0 && bits <= 32);
 
-	unsigned long val = (unsigned long) p[0]
-	                 | ((unsigned long) p[1] << 8)
-	                 | ((unsigned long) p[2] << 16);
+	uint32_t val = (uint32_t) p[0]
+	             | ((uint32_t) p[1] << 8)
+	             | ((uint32_t) p[2] << 16);
 
-	return ((val * 2654435761UL) & 0xFFFFFFFFUL) >> (32 - bits);
+	return (val * UINT32_C(2654435761)) >> (32 - bits);
 }
 
 static unsigned long

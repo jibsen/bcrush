@@ -32,7 +32,7 @@ static unsigned long
 crush_ssparse_workmem_size(unsigned long src_size)
 {
 	return (LOOKUP_SIZE < 2 * src_size ? 3 * src_size : src_size + LOOKUP_SIZE)
-	     * sizeof(unsigned long);
+	     * sizeof(uint32_t);
 }
 
 static unsigned long
@@ -67,11 +67,11 @@ crush_pack_ssparse(const void *src, void *dst, unsigned long src_size, void *wor
 	// One detail is that we actually use src_size + 1 elements of cost,
 	// but we put mpos after it, where we do not need the first element.
 	//
-	unsigned long *const prev = (unsigned long *) workmem;
-	unsigned long *const mpos = prev + src_size;
-	unsigned long *const mlen = mpos + src_size;
-	unsigned long *const cost = prev;
-	unsigned long *const lookup = mpos;
+	uint32_t *const prev = (uint32_t *) workmem;
+	uint32_t *const mpos = prev + src_size;
+	uint32_t *const mlen = mpos + src_size;
+	uint32_t *const cost = prev;
+	uint32_t *const lookup = mpos;
 
 	// Phase 1: Build hash chains
 	const int bits = 2 * src_size < LOOKUP_SIZE ? CRUSH_HASH_BITS : crush_log2(src_size);
@@ -154,13 +154,13 @@ crush_pack_ssparse(const void *src, void *dst, unsigned long src_size, void *wor
 			// max length will always be longer or equal, so we need
 			// only consider the extension.
 			if (len > max_len) {
-				unsigned long min_cost = ULONG_MAX;
+				unsigned long min_cost = UINT32_MAX;
 				unsigned long min_cost_len = MIN_MATCH - 1;
 
 				// Find lowest cost match length
 				for (unsigned long i = max_len + 1; i <= len; ++i) {
 					unsigned long match_cost = crush_match_cost(cur - pos - 1, i);
-					assert(match_cost < ULONG_MAX - cost[cur + i]);
+					assert(match_cost < UINT32_MAX - cost[cur + i]);
 					unsigned long cost_here = match_cost + cost[cur + i];
 
 					if (cost_here < min_cost) {
