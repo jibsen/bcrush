@@ -3,7 +3,7 @@
 //
 // C packer
 //
-// Copyright (c) 2018 Joergen Ibsen
+// Copyright (c) 2018-2020 Joergen Ibsen
 //
 // This software is provided 'as-is', without any express or implied
 // warranty. In no event will the authors be held liable for any damages
@@ -208,8 +208,8 @@ crush_max_packed_size(unsigned long src_size)
 }
 
 // Include compression algorithms used by crush_pack_level
+#include "crush_btparse.h"
 #include "crush_leparse.h"
-#include "crush_ssparse.h"
 
 unsigned long
 crush_workmem_size_level(unsigned long src_size, int level)
@@ -218,11 +218,11 @@ crush_workmem_size_level(unsigned long src_size, int level)
 	case 5:
 	case 6:
 	case 7:
+		return crush_leparse_workmem_size(src_size);
 	case 8:
 	case 9:
-		return crush_leparse_workmem_size(src_size);
 	case 10:
-		return crush_ssparse_workmem_size(src_size);
+		return crush_btparse_workmem_size(src_size);
 	default:
 		return CRUSH_ERROR;
 	}
@@ -240,11 +240,11 @@ crush_pack_level(const void *src, void *dst, unsigned long src_size,
 	case 7:
 		return crush_pack_leparse(src, dst, src_size, workmem, 64, 64);
 	case 8:
-		return crush_pack_leparse(src, dst, src_size, workmem, 512, 128);
+		return crush_pack_btparse(src, dst, src_size, workmem, 16, 96);
 	case 9:
-		return crush_pack_leparse(src, dst, src_size, workmem, 4096, 256);
+		return crush_pack_btparse(src, dst, src_size, workmem, 32, 224);
 	case 10:
-		return crush_pack_ssparse(src, dst, src_size, workmem, ULONG_MAX, ULONG_MAX);
+		return crush_pack_btparse(src, dst, src_size, workmem, ULONG_MAX, ULONG_MAX);
 	default:
 		return CRUSH_ERROR;
 	}
