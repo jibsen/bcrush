@@ -54,7 +54,8 @@ crush_pack_leparse(const void *src, void *dst, unsigned long src_size, void *wor
 		for (unsigned long i = 0; i < src_size; ++i) {
 			lbw_putbits(&lbw, (uint32_t) in[i] << 1, 9);
 		}
-		goto finalize;
+
+		return (unsigned long) (lbw_finalize(&lbw) - (unsigned char *) dst);
 	}
 
 	// With a bit of careful ordering we can fit in 3 * src_size words.
@@ -254,7 +255,6 @@ crush_pack_leparse(const void *src, void *dst, unsigned long src_size, void *wor
 		}
 	}
 
-finalize:
 	// Return compressed size
 	return (unsigned long) (lbw_finalize(&lbw) - (unsigned char *) dst);
 }

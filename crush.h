@@ -37,8 +37,8 @@ extern "C" {
 
 #define CRUSH_VER_MAJOR 0        /**< Major version number */
 #define CRUSH_VER_MINOR 2        /**< Minor version number */
-#define CRUSH_VER_PATCH 0        /**< Patch version number */
-#define CRUSH_VER_STRING "0.2.0" /**< Version number as a string */
+#define CRUSH_VER_PATCH 1        /**< Patch version number */
+#define CRUSH_VER_STRING "0.2.1" /**< Version number as a string */
 
 #ifdef CRUSH_DLL
 #  if defined(_WIN32) || defined(__CYGWIN__)

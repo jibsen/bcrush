@@ -69,7 +69,8 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 		for (unsigned long i = 0; i < src_size; ++i) {
 			lbw_putbits(&lbw, (uint32_t) in[i] << 1, 9);
 		}
-		goto finalize;
+
+		return (unsigned long) (lbw_finalize(&lbw) - (unsigned char *) dst);
 	}
 
 	uint32_t *const cost = (uint32_t *) workmem;
@@ -307,7 +308,6 @@ crush_pack_btparse(const void *src, void *dst, unsigned long src_size, void *wor
 		}
 	}
 
-finalize:
 	// Return compressed size
 	return (unsigned long) (lbw_finalize(&lbw) - (unsigned char *) dst);
 }
