@@ -2,7 +2,7 @@
 bcrush
 ======
 
-[![Build Status](https://dev.azure.com/jibsenorg/jibsen/_apis/build/status/jibsen.bcrush?branchName=master)](https://dev.azure.com/jibsenorg/jibsen/_build/latest?definitionId=2?branchName=master)
+[![Meson CI](https://github.com/jibsen/bcrush/workflows/Meson%20CI/badge.svg)](https://github.com/jibsen/bcrush/actions)
 
 About
 -----
